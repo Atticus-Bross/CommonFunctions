@@ -1,5 +1,5 @@
 from math import sqrt,atan,pi
-from random import randint
+from typing import Sequence
 Number = int | float
 def function_points(f,start:Number,end:Number,n:int=101)->tuple[tuple[Number,Number],...]:
     """function_points(f, start, end, n=101) Returns a series of ordered pairs from a given function
@@ -45,3 +45,12 @@ def sym_dict(dictionary:dict)->dict:
     for key in dictionary.keys():
         return_dict[return_dict[key]] = key
     return return_dict
+
+def black_slice(seq:Sequence, start:int|None=None, end:int|None=None, step:int=1)->Sequence:
+    """Makes a slice of a sequence that excludes the specified indexes
+
+    seq: the sequence, it must support the len function, if its constructor cannot turn
+    start: the first index to exclude
+    end: the value at which to stop excluding, this index will not be excluded
+    step: the amount to step between indexes to be excluded"""
+    if start < len(seq)
