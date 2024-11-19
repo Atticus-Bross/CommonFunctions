@@ -45,30 +45,3 @@ def sym_dict(dictionary:dict)->dict:
     for key in dictionary.keys():
         return_dict[return_dict[key]] = key
     return return_dict
-letter_equivalents:dict=sym_dict({'a':'A','b':'B','c':'C','d':'D','e':'E','f':'F','g':'G','h':'H','i':'I','j':'J'
-    ,'k':'K','l':'L','m':'M','n':'N','o':'O','p':'P','q':'Q','r':'R','s':'S','t':'T','u':'U','v':'V','w':'W','x':'X'
-    ,'y':'Y','z':'Z'})
-def same_letter(char1:str,char2:str)->bool:
-    """same_letter(char1, char2) Checks if two characters are the same, ignoring capitalization
-
-    char1: one of the characters to be compared
-    char2: the other character to be compared"""
-    if char1 in letter_equivalents:
-        return char1==char2 or letter_equivalents[char1]==char2
-    #if the char1 is not a letter, check for simple equality
-    else:
-        return char1 == char2
-def same_letters(str1: str,str2:str)->bool:
-    """same_letters(str1, str2) Checks whether two strings are the same, ignoring capitalization
-
-    str1: one of the strings
-    str2: the other string"""
-    #if the strings are different lengths, there is no need to continue
-    if len(str1)!=len(str2):
-        return False
-    index:int=0
-    while index<len(str1):
-        if not same_letter(str1[index],str2[index]):
-            return False
-        index =index+1
-    return True
