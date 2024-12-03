@@ -10,7 +10,7 @@ def rows(values: list, rows2: int) -> list[list]:
     for i in range(rows2):
         return_rows.append(values[i * row_len:(i + 1) * row_len])
     return return_rows
-def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str) -> list:
+def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str, _parents:tuple=()) -> list:
     """Unpacks an Iterable of Iterables into a single Iterable
 
     seq: the Iterable
@@ -22,7 +22,7 @@ def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str) -> lis
             if isinstance(element, str) and len(element) == 1:
                 unpacked.append(element)
             else:
-                unpacked.extend(deep_unpack(element, ignores))
+                unpacked.extend(deep_unpack(element, ignores, _parents))
         else:
             unpacked.append(element)
     return unpacked
