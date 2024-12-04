@@ -1,4 +1,15 @@
 from common_functions import *
+def inner(outer:Iterable)->Iterable:
+    """This generator tests how deep_unpack handles Iterables that indirectly contain references to themselves
+
+    outer2: should be a generator that yields inner(outer) thus creating a circular reference"""
+    yield outer
+class Outer:
+    """This generator tests how deep_unpack handles Iterables that indirectly contain references to themselves"""
+    def __init__(self)->None:
+        pass
+    def __iter__(self):
+        yield inner(self)
 def test_rows() -> None:
     """test_rows()
     Tests the rows function"""
@@ -12,5 +23,8 @@ def test_deep_unpack() -> None:
     assert deep_unpack([[['abc', None], [], 2.34], [[], [True, 3]]]) == ['abc', None, 2.34, True, 3]
     assert deep_unpack([[(1, 2, 3), ('abc', 'efg')], ['abc']], tuple) == [(1, 2, 3), ('abc', 'efg'), 'a', 'b', 'c']
     assert deep_unpack([[(1, 2, 3), ('abc', 'efg')], ['abc']], tuple | str) == [(1, 2, 3), ('abc', 'efg'), 'abc']
+    assert deep_unpack('abc')==['abc']
+    circular:Outer = Outer()
+    assert deep_unpack(circular)==[circular]
 test_rows()
 test_deep_unpack()

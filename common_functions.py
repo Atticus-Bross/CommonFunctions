@@ -16,13 +16,15 @@ def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str, _paren
     seq: the Iterable
     ignores: the types of Iterables to ignore"""
     unpacked: list = []
+    if isinstance(seq, ignores):
+        return [seq]
     for element in seq:
         if isinstance(element, Iterable) and not isinstance(element, ignores):
-            # this is to avoid the infinite recursion that occurs because a string contains a string which contains a string, etc.
-            if isinstance(element, str) and len(element) == 1:
+            # this is to handle Iterables that directly or indirectly yield themselves
+            if element in _parents:
                 unpacked.append(element)
             else:
-                unpacked.extend(deep_unpack(element, ignores, _parents))
+                unpacked.extend(deep_unpack(element, ignores, _parents+(element,)))
         else:
             unpacked.append(element)
     return unpacked
