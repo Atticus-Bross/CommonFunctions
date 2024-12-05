@@ -1,6 +1,6 @@
 from math import sqrt, atan, pi
 from types import UnionType
-from typing import Iterable
+from typing import Iterable, Callable
 
 Number = int | float
 
@@ -67,7 +67,8 @@ def table(col: int, *items: str) -> str:
     return '\n'.join(rows2)
 
 
-def _function_points(f, start: Number, end: Number, n: int = 101) -> tuple[tuple[Number, Number]]:
+def _function_points(f: Callable[[Number], Number], start: Number, end: Number, n: int = 101) -> tuple[
+    tuple[Number, Number]]:
     """Returns a series of ordered pairs from a given function
 
     f: a python function that takes one numerical input and produces one numerical output
@@ -83,7 +84,8 @@ def _function_points(f, start: Number, end: Number, n: int = 101) -> tuple[tuple
     return points
 
 
-def function_lines(f, start: Number, end: Number, n: int = 100) -> tuple[tuple[Number, Number]]:
+def function_lines(f: Callable[[Number], Number], start: Number, end: Number, n: int = 100) -> tuple[
+    tuple[Number, Number]]:
     """Returns a series of lines (length, heading) approximating a function
 
     f: a python function that takes one numerical input and produces one numerical output
