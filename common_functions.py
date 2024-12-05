@@ -30,6 +30,17 @@ def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str, _paren
         else:
             unpacked.append(element)
     return unpacked
+
+
+def _table_row(*items: str) -> str:
+    """table_row(*items) Generates a row of a Markdown table
+
+    *items: the items of the row"""
+    if len(items) < 1:
+        raise ValueError('there must be at least one item')
+    row: str = '|'.join(items)
+    row = '|' + row + '|'
+    return row
 def table(col: int, *items: str) -> str:
     """table(*items) Generates a Markdown table
 
@@ -45,7 +56,7 @@ def table(col: int, *items: str) -> str:
     # calculate number of rows2
     for i in range(rows_num):
         # the range of indexes that correspond to rows2
-        rows2.append(table_row(*items[col * i:col * (i + 1)]), )
+        rows2.append(_table_row(*items[col * i:col * (i + 1)]), )
     # calculate how to add the -'s
     header_indication: str = '|'
     for i in range(len(row1)):

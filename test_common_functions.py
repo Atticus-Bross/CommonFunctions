@@ -1,5 +1,9 @@
-from common_functions import *
 from io import StringIO
+
+from common_functions import *
+from common_functions import _table_row
+
+
 def inner(outer:Iterable)->Iterable:
     """This generator tests how deep_unpack handles Iterables that indirectly contain references to themselves
 
@@ -27,17 +31,30 @@ def test_deep_unpack() -> None:
     assert deep_unpack('abc')==['abc']
     circular:Outer = Outer()
     assert deep_unpack(circular)==[circular]
+
+
+def test_table_row() -> None:
+    """Tests the _table_row function"""
+    try:
+        assert _table_row()
+        assert False
+    except ValueError:
+        pass
+    assert _table_row('a') == '|a|'
+    assert _table_row('a', 'b') == '|a|b|'
+    assert _table_row('a', 'b', 'c') == '|a|b|c|'
 def test_table() -> None:
     """Tests the table function"""
     with StringIO() as test:
         test.write(table(2, 'a', 'b', 'c', 'd'))
-        assert test.getvalue()=='|a|b|\n|c|d|'
+        assert test.getvalue() == '|a|b|\n|---|---|\n|c|d|'
     with StringIO() as test:
         test.write(table(3, 'aaa', 'bjk', 'as', 'asd', 'asd', 're'))
-        assert test.getvalue()=='|aaa|bjk|as|\n|asd|asd|re|'
+        assert test.getvalue() == '|aaa|bjk|as|\n|---|---|---|\n|asd|asd|re|'
     with StringIO() as test:
         test.write(table(2, 'a', 'b', 'c', 'd', 'e', 'f'))
-        assert test.getvalue()=='|a|b|\n|c|d|\n|e|f|'
+        assert test.getvalue() == '|a|b|\n|---|---|\n|c|d|\n|e|f|'
 test_rows()
 test_deep_unpack()
+test_table_row()
 test_table()
