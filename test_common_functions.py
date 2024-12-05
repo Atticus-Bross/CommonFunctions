@@ -1,4 +1,5 @@
 from common_functions import *
+from io import StringIO
 def inner(outer:Iterable)->Iterable:
     """This generator tests how deep_unpack handles Iterables that indirectly contain references to themselves
 
@@ -26,5 +27,10 @@ def test_deep_unpack() -> None:
     assert deep_unpack('abc')==['abc']
     circular:Outer = Outer()
     assert deep_unpack(circular)==[circular]
+def test_table() -> None:
+    """Tests the table function"""
+    mdfile.write(table(2, 'a', 'b', 'c', 'd'))
+    mdfile.write(table(3, 'aaa', 'bjk', 'as', 'asd', 'asd', 're'))
+    mdfile.write(table(2, 'a', 'b', 'c', 'd', 'e', 'f'))
 test_rows()
 test_deep_unpack()

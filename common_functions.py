@@ -28,3 +28,25 @@ def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str, _paren
         else:
             unpacked.append(element)
     return unpacked
+def table(col: int, *items: str) -> str:
+    """table(*items) Generates a Markdown table
+
+    col: the number of columns
+    *items: the items in the table"""
+    if len(items) % col != 0:
+        raise ValueError('the items must fit evenly into the columns')
+    rows_num: int = len(items) // col
+    if rows_num < 2:
+        raise ValueError('there must be at least two rows')
+    row1: list = list(items[0:col])
+    rows: list = []
+    # calculate number of rows
+    for i in range(rows_num):
+        # the range of indexes that correspond to rows
+        rows.append(table_row(*items[col * i:col * (i + 1)]), )
+    # calculate how to add the -'s
+    header_indication: str = '|'
+    for i in range(len(row1)):
+        header_indication = header_indication + '---|'
+    rows.insert(1, header_indication)
+    return '\n'.join(rows)
