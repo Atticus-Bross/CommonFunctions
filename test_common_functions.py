@@ -29,8 +29,15 @@ def test_deep_unpack() -> None:
     assert deep_unpack(circular)==[circular]
 def test_table() -> None:
     """Tests the table function"""
-    mdfile.write(table(2, 'a', 'b', 'c', 'd'))
-    mdfile.write(table(3, 'aaa', 'bjk', 'as', 'asd', 'asd', 're'))
-    mdfile.write(table(2, 'a', 'b', 'c', 'd', 'e', 'f'))
+    with StringIO() as test:
+        test.write(table(2, 'a', 'b', 'c', 'd'))
+        assert test.getvalue()=='|a|b|\n|c|d|'
+    with StringIO() as test:
+        test.write(table(3, 'aaa', 'bjk', 'as', 'asd', 'asd', 're'))
+        assert test.getvalue()=='|aaa|bjk|as|\n|asd|asd|re|'
+    with StringIO() as test:
+        test.write(table(2, 'a', 'b', 'c', 'd', 'e', 'f'))
+        assert test.getvalue()=='|a|b|\n|c|d|\n|e|f|'
 test_rows()
 test_deep_unpack()
+test_table()
