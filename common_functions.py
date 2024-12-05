@@ -1,5 +1,7 @@
-from typing import Iterable
 from types import UnionType
+from typing import Iterable
+
+
 def rows(values: list, rows2: int) -> list[list]:
     """Breaks data up into a given number of rows
 
@@ -39,14 +41,14 @@ def table(col: int, *items: str) -> str:
     if rows_num < 2:
         raise ValueError('there must be at least two rows')
     row1: list = list(items[0:col])
-    rows: list = []
-    # calculate number of rows
+    rows2: list = []
+    # calculate number of rows2
     for i in range(rows_num):
-        # the range of indexes that correspond to rows
-        rows.append(table_row(*items[col * i:col * (i + 1)]), )
+        # the range of indexes that correspond to rows2
+        rows2.append(table_row(*items[col * i:col * (i + 1)]), )
     # calculate how to add the -'s
     header_indication: str = '|'
     for i in range(len(row1)):
         header_indication = header_indication + '---|'
-    rows.insert(1, header_indication)
-    return '\n'.join(rows)
+    rows2.insert(1, header_indication)
+    return '\n'.join(rows2)
