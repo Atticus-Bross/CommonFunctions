@@ -1,7 +1,7 @@
 from io import StringIO
 
 from common_functions import *
-from common_functions import _table_row
+from common_functions import _table_row, _function_points
 
 
 def inner(outer:Iterable)->Iterable:
@@ -57,15 +57,15 @@ def test_table() -> None:
 
 
 def test_function_points() -> None:
-    """test_function_points() Tests the function_points function"""
-    assert len(function_points(lambda x: x, 0, 10)) == 101
-    assert function_points(lambda x: x, 0, 100)[50][1] == 50
-    for points in function_points(lambda x: x, 0, 100, 10):
+    """test__function_points() Tests the _function_points function"""
+    assert len(_function_points(lambda x: x, 0, 10)) == 101
+    assert _function_points(lambda x: x, 0, 100)[50][1] == 50
+    for points in _function_points(lambda x: x, 0, 100, 10):
         assert points[0] == points[1]
-    assert len(function_points(lambda x: x, 0, 100, 10)) == 10
-    for points in function_points(lambda x: x ** 2, 55, 234, 17):
+    assert len(_function_points(lambda x: x, 0, 100, 10)) == 10
+    for points in _function_points(lambda x: x ** 2, 55, 234, 17):
         assert points[0] ** 2 == points[1]
-    assert function_points(lambda x: x ** 2, 1, 10, 10)[5][1] == 25
+    assert _function_points(lambda x: x ** 2, 1, 10, 10)[5][1] == 25
 
 
 def test_function_lines() -> None:

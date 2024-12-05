@@ -2,6 +2,7 @@ from math import sqrt, atan, pi
 from types import UnionType
 from typing import Iterable
 
+Number = int | float
 
 def rows(values: list, rows2: int) -> list[list]:
     """Breaks data up into a given number of rows
@@ -66,11 +67,8 @@ def table(col: int, *items: str) -> str:
     return '\n'.join(rows2)
 
 
-Number = int | float
-
-
-def function_points(f, start: Number, end: Number, n: int = 101) -> tuple[tuple[Number, Number], ...]:
-    """function_points(f, start, end, n=101) Returns a series of ordered pairs from a given function
+def _function_points(f, start: Number, end: Number, n: int = 101) -> tuple[tuple[Number, Number]]:
+    """Returns a series of ordered pairs from a given function
 
     f: a python function that takes one numerical input and produces one numerical output
     start: the input to start the computation at
@@ -85,14 +83,14 @@ def function_points(f, start: Number, end: Number, n: int = 101) -> tuple[tuple[
     return points
 
 
-def function_lines(f, start: Number, end: Number, n: int = 100) -> tuple[tuple[Number, Number], ...]:
-    """function_lines(f, start, end, n=100) Returns a series of lines (length, heading) approximating a function
+def function_lines(f, start: Number, end: Number, n: int = 100) -> tuple[tuple[Number, Number]]:
+    """Returns a series of lines (length, heading) approximating a function
 
     f: a python function that takes one numerical input and produces one numerical output
     start: the input to start the computation at
     end: the input to end the computation at
     n: the number of lines to compute"""
-    points: tuple = function_points(f, start, end, n + 1)
+    points: tuple = _function_points(f, start, end, n + 1)
     lines: tuple = ()
     # iterates through every element in points except the last
     for index, point in enumerate(points[0:-1]):
