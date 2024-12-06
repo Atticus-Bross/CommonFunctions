@@ -1,6 +1,6 @@
+from collections.abc import Iterable, Callable, Sequence, Mapping
 from math import sqrt, atan, pi
 from types import UnionType
-from typing import Iterable, Callable, Sequence, Mapping
 
 Number = int | float
 
