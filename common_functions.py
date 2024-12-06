@@ -1,6 +1,6 @@
 from math import sqrt, atan, pi
 from types import UnionType
-from typing import Iterable, Callable, Sequence
+from typing import Iterable, Callable, Sequence, Mapping
 
 Number = int | float
 
@@ -108,19 +108,19 @@ def function_lines(f: Callable[[Number], Number], start: Number, end: Number, n:
     return lines
 
 
-def fetch(seq: Sequence, indexes: list) -> list:
-    """Retrieves the requested indexes from a sequence, this primarily for retrieving multiple values from a dictionary
-    or for retrieving data from multiple parts nested data structures
+def fetch(seq: Sequence | Mapping, indexes: list) -> list:
+    """Retrieves the requested indexes from a sequence, this primarily for retrieving multiple data points from a
+    complex data structure
 
     seq: the sequence to retrieve from
     indexes: a list of 'pathways' to the requested data, values that are simply indexes or keys will be simply
-    retrieved. If the value is a list it should contain two items, the index or key of a sublist and a list of
-    similarly formatted indexes to retrieve from that sublist (these indexes can be lists themselves to retrieve
-    from sub-sublists)"""
+    retrieved. If the value is a list the first value in the list is taken to be the index to a subsequence in seq
+    and the other values are taken to be the indexes of values desired from that subsequence (these can also be lists
+    in order to retrieve from sub-subsequences)"""
     items: list = []
     for index in indexes:
         if isinstance(index, list):
-            items.extend(fetch(seq[index[0]], index[1]))
+            items.extend(fetch(seq[index[0]], index[1:]))
         else:
             items.append(seq[index])
     return items

@@ -57,7 +57,7 @@ def test_table() -> None:
 
 
 def test_function_points() -> None:
-    """test__function_points() Tests the _function_points function"""
+    """Tests the _function_points function"""
     assert len(_function_points(lambda x: x, 0, 10)) == 101
     assert _function_points(lambda x: x, 0, 100)[50][1] == 50
     for points in _function_points(lambda x: x, 0, 100, 10):
@@ -69,7 +69,7 @@ def test_function_points() -> None:
 
 
 def test_function_lines() -> None:
-    """test_function_lines() Tests the function_lines function"""
+    """Tests the function_lines function"""
     assert len(function_lines(lambda x: x, 0, 10)) == 100
     assert function_lines(lambda x: x, 0, 10, 10)[0][0] == sqrt(2)
     assert function_lines(lambda x: x, 0, 10, 15)[0][1] == 45
@@ -79,9 +79,24 @@ def test_function_lines() -> None:
     assert len(function_lines(lambda x: x, 15, 67, 45)) == 45
     assert function_lines(lambda x: x ** 2, 0, 10, 10)[0][0] == sqrt(2)
     assert function_lines(lambda x: x ** 2, 0, 10, 10)[0][1] == 45
+
+
+def test_fetch() -> None:
+    """Tests the fetch function"""
+    assert fetch([], []) == []
+    assert fetch([1, 2, 3, 4], []) == []
+    assert fetch([1, 2, 3, 4, 5], [2]) == [3]
+    assert fetch([1, 2, 3, 4, 5], [0, 1, 4]) == [1, 2, 5]
+    assert fetch([1, 2, 3, 4, 5], [0, 1, 2, 3, 4]) == [1, 2, 3, 4, 5]
+    assert fetch({'a': 1, 5: 'b', 'the': 'are'}, ['a', 5, 'the']) == [1, 'b', 'are']
+    assert fetch({'a': [1, 2, 3, 4, 5]}, [['a', 0, 1, 4]]) == [1, 2, 5]
+    assert fetch([0, {1: 2, 3: 4, 5: 6}, 1, {7: 8, 9: 10, 11: 12}, 2], [[1, 3], [3, 9, 11], 4]) == [4, 10, 12, 2]
+    assert fetch({'abc': [{1: 2}, {3: 4}], 'def': [{5: 6}, {7: 8}]},
+                 [['abc', [0, 1], [1, 3]], ['def', [0, 5], [1, 7]]]) == [2, 4, 6, 8]
 test_rows()
 test_deep_unpack()
 test_table_row()
 test_table()
 test_function_points()
 test_function_lines()
+test_fetch()
