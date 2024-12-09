@@ -4,6 +4,7 @@ from types import UnionType
 
 Number = int | float
 
+
 def rows(values: list, rows2: int) -> list[list]:
     """Breaks data up into a given number of rows
 
@@ -14,7 +15,9 @@ def rows(values: list, rows2: int) -> list[list]:
     for i in range(rows2):
         return_rows.append(values[i * row_len:(i + 1) * row_len])
     return return_rows
-def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str, _parents:tuple=()) -> list:
+
+
+def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str, _parents: tuple = ()) -> list:
     """Unpacks an Iterable of Iterables into a single Iterable
 
     seq: the Iterable
@@ -28,7 +31,7 @@ def deep_unpack(seq: Iterable[Iterable], ignores: type | UnionType = str, _paren
             if element in _parents:
                 unpacked.append(element)
             else:
-                unpacked.extend(deep_unpack(element, ignores, _parents+(element,)))
+                unpacked.extend(deep_unpack(element, ignores, _parents + (element,)))
         else:
             unpacked.append(element)
     return unpacked
@@ -43,6 +46,8 @@ def _table_row(*items: str) -> str:
     row: str = '|'.join(items)
     row = '|' + row + '|'
     return row
+
+
 def table(col: int, *items: str) -> str:
     """table(*items) Generates a Markdown table
 
