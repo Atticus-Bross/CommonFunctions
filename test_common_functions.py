@@ -7,7 +7,7 @@ from common_functions import _table_row, _function_points
 def inner(outer:Iterable)->Iterable:
     """This generator tests how deep_unpack handles Iterables that indirectly contain references to themselves
 
-    outer2: should be a generator that yields inner(outer) thus creating a circular reference"""
+    outer: should be a generator that yields inner(outer) thus creating a circular reference"""
     yield outer
 class Outer:
     """This generator tests how deep_unpack handles Iterables that indirectly contain references to themselves"""
