@@ -109,7 +109,7 @@ def function_lines(f: Callable[[Number], Number], start: Number, end: Number, n:
 
 
 def fetch(seq: Sequence | Mapping, indexes: list) -> list:
-    """Retrieves the requested indexes from a sequence, this primarily for retrieving multiple data points from a
+    """Retrieves the requested indexes from a sequence, this is primarily for retrieving multiple data points from a
     complex data structure
 
     seq: the sequence to retrieve from
