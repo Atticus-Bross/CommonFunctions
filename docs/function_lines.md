@@ -2,12 +2,13 @@
 
 The function first stores the results of calling the helper function _function_points on with the parameters f, start,
 end, and n + 1. The n + 1 is necessary because the function needs n + 1 ordered pairs of points to calculate n lines
-(because lines are formed in between the sets of ordered pairs). The length is calculated with the distance formula and
+(because lines are formed in between the sets of ordered pairs). The length is calculated with the distance formula, and
 the heading is calculated from the slope.
 
 The function takes an average of 6.93e-05 seconds to calculate the 100 lines for a parabola, with a maximum memory usage
-of 68030 bytes during this process. The complexity of this function is on the order of n * m where m is the complexity
-of the function that generates the points.
+of 68030 bytes during this process. The complexity of this function is on the order of n * m where n is the number of
+points the user wants and m is the complexity of the function that is being used to generate the points.
 
-The data the function generates can be used to allow a turtle to approximate that function. The data can also be used to
+The data the function generates can be used to allow a turtle to draw an approximation of that function. The data can
+also be used to
 approximate shapes in other contexts.
