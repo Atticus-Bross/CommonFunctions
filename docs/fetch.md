@@ -9,9 +9,10 @@ with the other elements being similarly valid access paths for the inner sequenc
 
 The function takes an average of 8.57e-6 seconds to retrieve 100 items from a list (time taken is independent of the
 size of the list). It has a maximum memory usage of 56,656 bytes during the process. Its complexity is on the order of
-m, where m is the number of indexes to retrieve.
+m, where m is the number of indexes to retrieve. The implementation of this function was simplified with recursion
+at the cost of higher memory usage.
 
 The simplest use case is to simplify the process of retrieving multiple items from a dictionary. The function is also
-useful when the user needs retrieve specific data and then keep that data bundled together. The function can also be
-used to when very specific data is needed and the data structure is complex (such as when some items are in inner
-sequences and some are not).
+useful when the user needs retrieve specific data and then keep that data bundled together. A final use for this
+function is when very specific data is needed and the data structure is complex
+(such as when some items the user needs are in inner sequences and some are not).
